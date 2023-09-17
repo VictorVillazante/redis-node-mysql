@@ -1,0 +1,23 @@
+{
+    "name": "laboratorio1",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.2",
+        "express": "^4.17.2",
+        "mysql": "^2.18.1",
+        "redis": "^4.0.4",
+        "response-time": "^2.3.2",
+        "xhr2": "^0.2.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}

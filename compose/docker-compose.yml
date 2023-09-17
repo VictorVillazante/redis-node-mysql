@@ -1,0 +1,46 @@
+version: '3.8'
+networks:
+  ucbnet:
+    driver: bridge
+services:
+  #node-2:
+  #  image: laboratoriov6
+  #  ports:
+  #    - 8082:80  
+  #  networks:
+  #    - ucbnet
+  mysql-server:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    expose:
+      - "33060"
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_DATABASE=twitter
+      - MYSQL_USER=victor
+      - MYSQL_PASSWORD=0
+      - MYSQL_ROOT_PASSWORD=0
+    networks:
+      - ucbnet
+    
+  redis:
+    image: redis
+    expose:
+      - "6000"
+    ports:
+      - "6000:6379"
+    networks:
+      - ucbnet
+
+  node-1:
+    depends_on:
+      - mysql-server
+      - redis
+    command: bash -c 'while !</dev/tcp/mysql-server/33060; do sleep 10; done; npm start'
+    image: laboratoriov8
+    ports:
+      - 8083:8083
+    networks: 
+      - ucbnet
